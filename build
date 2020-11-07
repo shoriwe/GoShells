@@ -28,12 +28,12 @@ prepare_main_file(){
 	else
 		func_parameters+=" nil)"
 	fi
-	if [ $1 == "reverse" ]
+	if [ "$1" == "reverse" ]
 	then
-		echo -e $_base"ReverseShell$func_parameters\n}" > main.go
-	elif [ $1 == "bind" ]
+		echo -e "$_base""ReverseShell$func_parameters\n}" > main.go
+	elif [ "$1" == "bind" ]
 	then
-		echo -e $_base"BindShell$func_parameters\n}" > main.go
+		echo -e "$_base""BindShell$func_parameters\n}" > main.go
 	else
 		echo "Modes available: reverse, bind"
 	fi
@@ -41,36 +41,36 @@ prepare_main_file(){
 
 main(){
 	current_directory=$(pwd)
-	cd $(dirname $0)
+	cd "$(dirname $0)"
 	if [ $# -lt 5 ]
 	then
-		echo  $_usage
+		echo  "$_usage"
 		return
 	fi
 
-	result=$(prepare_main_file ${@:2})
+	result=$(prepare_main_file "${@:2}")
 	if [ "$result" == "Modes available: reverse, bind" ]
 	then
-		echo $result
+		echo "$result"
 	fi
 
-	if [ $1 == "windows64" ]
+	if [ "$1" == "windows64" ]
 	then
-		GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o $current_directory
-	elif [ $1 == "windows32" ]
+		GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o "$current_directory"
+	elif [ "$1" == "windows32" ]
 	then
-		GOOS=windows GOARCH=386 go build -ldflags="-s -w" -o $current_directory
-	elif [ $1 == "linux64" ]
+		GOOS=windows GOARCH=386 go build -ldflags="-s -w" -o "$current_directory"
+	elif [ "$1" == "linux64" ]
 	then
-		GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o $current_directory
-	elif [ $1 == "linux32" ]
+		GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o "$current_directory"
+	elif [ "$1" == "linux32" ]
 	then
-		GOOS=linux GOARCH=386 go build -ldflags="-s -w" -o $current_directory
+		GOOS=linux GOARCH=386 go build -ldflags="-s -w" -o "$current_directory"
 	else
-		echo $_usage
+		echo "$_usage"
 		return
 	fi
 	echo "Shell compiled"
 }
 
-main $@
+main "$@"
