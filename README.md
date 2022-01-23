@@ -5,7 +5,7 @@ Quick tool to create Windows/Linux Bind or reverse shells binaries
 ## Installation
 
 ```shell
-go install github.com/shoriwe/GoShells
+go install github.com/shoriwe/GoShells/cmd/goshells
 ```
 
 ## Usage
